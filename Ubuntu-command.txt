@@ -1,0 +1,39 @@
+*//First we wanna update it!!
+sudo apt update
+
+*//Then we wanna install verilator!!
+sudo add-apt-repository universe
+sudo apt install verilator
+
+*//Now we check is the verilator is Installed!!
+verilator --version
+
+*//Now we wanna install GTKwave in it!!
+sudo apt update             *//No need   
+sudo apt install gtkwave
+sudo apt install git build-essential libgtk-3-dev libgtksourceview-3.0-dev \ libglade2-dev libtcl8.6-dev libxt-dev zlib1g-dev
+
+*//Now we check is the GTKwave is Installed!!
+gtkwave --version
+
+*//Now we make a verilog file...
+touch half_adder.v
+
+*//Edit the file...
+nano half_adder.v
+
+*//Now we make TestBench...
+touch tb_half_adder.cpp    
+
+*//Edit the file...
+nano tb_half_adder.cpp
+
+*//For compilation...
+verilator --cc half_adder.v --exe tb.cpp --trace
+make -C obj_dir -f Vhalf_adder.mk Vhalf_adder
+./obj_dir/Vhalf_adder
+
+*//For GTK-wave-form...
+gtkwave wave.vcd
+
+*//THE END :)
